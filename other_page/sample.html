@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サンプルHTML</title>
+</head>
+
+<body>
+    <header></header>
+    <main id="dataList"></main>
+    <footer></footer>
+    <script>
+        var api_url = 'https://script.google.com/macros/s/AKfycbwfOkVm_pPY6iisyMcFjUZKGvGsbmu02Q5Mg5sTQ0ooJ6k6xch2s25gJY_Locf969W5/exec'; // 生成したAPIのURLを指定
+        fetch(api_url)
+            .then(function (fetch_data) {
+                return fetch_data.json();
+            })
+            .then(function (json) {
+                var dataListContainer = document.getElementById('dataList');
+                var ul = document.createElement('ul');
+
+                for (var i in json) {
+                    var li = document.createElement('li');
+                    li.textContent = "ID: " + json[i].id + ", Name: " + json[i].name + ", Price: " + json[i].price + ", Stock: " + json[i].stock;
+                    ul.appendChild(li);
+                }
+
+                dataListContainer.appendChild(ul);
+            });
+    </script>
+</body>
+
+</html>
